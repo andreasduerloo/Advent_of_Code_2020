@@ -27,7 +27,7 @@ func parse(input string) map[string]*color {
 func newColor(s string) *color {
 	fields := strings.Fields(s)
 	out := color{
-		name:       fields[0] + " " + fields[1],
+		name:       fields[0] + " " + fields[1], // Could also work with a regex with an anchor: `^[a-z]+ [a-z]+`, that would grab the first two words.
 		canContain: children(s),
 	}
 
