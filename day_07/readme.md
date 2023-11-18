@@ -22,7 +22,7 @@ With those changes the answer can be found through a recursive function:
 func countBags(c *color, bags map[string]*color) int {
 	var count int
 	if len(c.canContain) == 0 { // This bag doesn't contain any others
-		return 0
+		return count // Will be zero
 	}
 
 	for col, num := range c.canContain {
@@ -32,4 +32,4 @@ func countBags(c *color, bags map[string]*color) int {
 	return count
 }
 ```
-Going back to my initial two ideas, it seems my current approach is far simpler than setting up a Union-Find data structure, while essentially doing the same thing, additionally, a weighted, directional graph would have been overkill for the second star. Sometimes less really is more. Nevertheless, it might be a good exercise that I can come back to.
+Going back to my initial two ideas, it seems my current approach is far simpler than setting up a Union-Find data structure, while essentially doing the same thing. Additionally, a weighted, directional graph would have been overkill for the second star. Sometimes less really is more. Nevertheless, it might be a good exercise that I can come back to.

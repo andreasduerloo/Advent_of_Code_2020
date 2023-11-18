@@ -68,7 +68,7 @@ func checkColor(c *color, set map[string]struct{}) {
 func countBags(c *color, bags map[string]*color) int {
 	var count int
 	if len(c.canContain) == 0 {
-		return 0
+		return count // Will be zero
 	}
 
 	for col, num := range c.canContain {
