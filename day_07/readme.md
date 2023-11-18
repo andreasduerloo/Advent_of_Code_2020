@@ -32,4 +32,6 @@ func countBags(c *color, bags map[string]*color) int {
 	return count
 }
 ```
+Where I though most of the heavy lifting for this day would be done by whatever data structure I would end up using, regexes were the real stars of the show. They made handling the somewhat awkwardly formatted input far more manageable.
+
 Going back to my initial two ideas, it seems my current approach is far simpler than setting up a Union-Find data structure, while essentially doing the same thing. Additionally, a weighted, directional graph would have been overkill for the second star. Sometimes less really is more. Nevertheless, it might be a good exercise that I can come back to.
