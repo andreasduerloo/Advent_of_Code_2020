@@ -17,9 +17,5 @@ func Solve() (int, int) {
 	first, _ := runUntilLoop(instructions)
 	second := runUntilTerminates(instructions)
 
-	// Second star:
-	// Naive: try every nop and jmp one by one
-	// Smart?: go back from the end and determine which nop/jmp should change?
-
 	return first, second
 }
