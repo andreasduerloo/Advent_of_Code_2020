@@ -26,6 +26,18 @@ func bsp(s string, low, high int) int { // Recursive
 	}
 }
 
+func binary(s string) int { // Turn the string directly into the binary number it will turn out to be, anyway
+	var out int
+
+	for i, r := range s {
+		if r == 'B' || r == 'R' {
+			out += (1 << (9 - i))
+		}
+	}
+
+	return out
+}
+
 func seatID(seat string) int {
 	return (8 * bsp(seat[0:7], 0, 127)) + bsp(seat[7:], 0, 7)
 }
