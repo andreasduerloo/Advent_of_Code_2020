@@ -9,6 +9,7 @@ import (
 	"advent2020/day_06"
 	"advent2020/day_07"
 	"advent2020/day_08"
+	"advent2020/day_09"
 	"fmt"
 	"os"
 	"strconv"
@@ -54,8 +55,10 @@ func main() {
 	case 8:
 		first, second := day_08.Solve()
 		fmt.Println(first, second)
+	case 9:
+		first, second := day_09.Solve()
+		fmt.Println(first, second)
 	default:
 		fmt.Println("That's either not a valid day, or it has not been solved (yet!)")
 	}
-
 }
