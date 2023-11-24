@@ -15,6 +15,7 @@ func Solve() (int, int) {
 	numbers := parse(input)
 
 	first := firstIncorrect(numbers)
+	second := findSum(first, numbers)
 
-	return first, 0
+	return first, second
 }

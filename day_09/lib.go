@@ -2,6 +2,7 @@ package day_09
 
 import (
 	"advent2020/helpers"
+	"slices"
 	"strconv"
 	"strings"
 )
@@ -52,4 +53,26 @@ func sumPresent(num int, preamble []int) bool {
 	}
 
 	return false
+}
+
+// First coutning upwards, I assume counting backwards would give the solution quicker, but is slightly more complicated
+// Returns the sum of the lowest and highest values
+func findSum(val int, numbers []int) int {
+	for i, num := range numbers {
+		sum := num
+		sumNums := []int{num}
+		j := i
+
+		for sum < val {
+			sum += numbers[j+1]
+			sumNums = append(sumNums, numbers[j+1])
+			j++
+		}
+
+		if sum == val {
+			return slices.Min(sumNums) + slices.Max(sumNums)
+		}
+	}
+
+	return 0
 }
