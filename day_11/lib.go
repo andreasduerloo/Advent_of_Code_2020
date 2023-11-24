@@ -33,7 +33,7 @@ func parse(input []byte) grid {
 	}
 }
 
-func (old grid) apply() grid {
+func (old grid) apply1() grid {
 	outArr := make([]rune, 0)
 	var changed bool
 
@@ -96,6 +96,126 @@ func (old grid) apply() grid {
 			}
 		}
 
+	}
+
+	return grid{
+		content: outArr,
+		width:   old.width,
+		height:  old.height,
+		changed: changed,
+	}
+}
+
+func (old grid) apply2() grid {
+	outArr := make([]rune, 0)
+	var changed bool
+
+	for j, char := range old.content {
+		if char == '.' {
+			outArr = append(outArr, '.')
+		} else {
+			var occupied int
+			i := j
+			for i >= old.width && i%old.width != 0 { // Look up and left
+				if old.content[i-old.width-1] == '#' {
+					occupied++
+					break
+				} else if old.content[i-old.width-1] == 'L' {
+					break
+				} else {
+					i = i - old.width - 1
+				}
+			}
+			i = j
+			for i >= old.width && i%old.width != old.width-1 { // Look up and right
+				if old.content[i-old.width+1] == '#' {
+					occupied++
+					break
+				} else if old.content[i-old.width+1] == 'L' {
+					break
+				} else {
+					i = i - old.width + 1
+				}
+			}
+			i = j
+			for i < (old.width*(old.height-1)) && i%old.width != 0 { // Look down and left
+				if old.content[i+old.width-1] == '#' {
+					occupied++
+					break
+				} else if old.content[i+old.width-1] == 'L' {
+					break
+				} else {
+					i = i + old.width - 1
+				}
+			}
+			i = j
+			for i < (old.width*(old.height-1)) && i%old.width != old.width-1 { // Look down and right
+				if old.content[i+old.width+1] == '#' {
+					occupied++
+					break
+				} else if old.content[i+old.width+1] == 'L' {
+					break
+				} else {
+					i = i + old.width + 1
+				}
+			}
+			i = j
+			for i%old.width != 0 { // Look left
+				if old.content[i-1] == '#' {
+					occupied++
+					break
+				} else if old.content[i-1] == 'L' {
+					break
+				} else {
+					i--
+				}
+			}
+			i = j
+			for i%old.width != old.width-1 { // Look right
+				if old.content[i+1] == '#' {
+					occupied++
+					break
+				} else if old.content[i+1] == 'L' {
+					break
+				} else {
+					i++
+				}
+			}
+			i = j
+			for i >= old.width { // Look up
+				if old.content[i-old.width] == '#' {
+					occupied++
+					break
+				} else if old.content[i-old.width] == 'L' {
+					break
+				} else {
+					i = i - old.width
+				}
+			}
+			i = j
+			for i < (old.width*old.height)-old.width { // Look down
+				if old.content[i+old.width] == '#' {
+					occupied++
+					break
+				} else if old.content[i+old.width] == 'L' {
+					break
+				} else {
+					i = i + old.width
+				}
+			}
+
+			if char == '#' && occupied >= 5 {
+				outArr = append(outArr, 'L')
+				changed = true
+			} else if char == '#' && occupied < 5 {
+				outArr = append(outArr, '#')
+			} else if char == 'L' && occupied == 0 {
+				outArr = append(outArr, '#')
+				changed = true
+			} else if char == 'L' && occupied > 0 {
+				outArr = append(outArr, 'L')
+			}
+		}
 	}
 
 	return grid{

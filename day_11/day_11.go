@@ -15,10 +15,18 @@ func Solve() (int, int) {
 	plan := parse(input)
 
 	for plan.changed {
-		plan = plan.apply()
+		plan = plan.apply1()
 	}
 
 	first := countOccupied(plan)
 
-	return first, 0
+	plan = parse(input)
+
+	for plan.changed {
+		plan = plan.apply2()
+	}
+
+	second := countOccupied(plan)
+
+	return first, second
 }
