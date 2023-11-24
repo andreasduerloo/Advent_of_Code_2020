@@ -24,7 +24,7 @@ func combinations(joltages []int) int {
 	return localsum
 }
 ```
-Given that we have not defined any base cases, the function above will either run forever or run into an error once we start hitting empty slices. There are two base cases to foresee:
+Given that we have not defined any base cases, the function above will either run forever or (more likely) run into an error once we start hitting empty slices. There are two base cases to foresee:
 - Either we're looking at a slice containing a single adapter: there's one way to reach this, we return 1.
 - Either we're looking at two adapters: there's also only one way to reach this, return 1.
 From then on we start passing the values back up the recursion tree.
